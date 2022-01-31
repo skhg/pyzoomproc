@@ -5,7 +5,7 @@ setup(
     version='0.1',
     py_modules=['pyzoomproc'],
     install_requires=[
-        'Click','psutil'
+        'Click', 'psutil'
     ],
     entry_points='''
         [console_scripts]
