@@ -16,13 +16,13 @@ mlog = logging.getLogger('pyzoomproc')
 
 @click.command()
 @click.option('--onair', 'onair_cmd', required=True, type=click.Path(),
-                help='Script to run when joining a Zoom meeting')
+              help='Script to run when joining a Zoom meeting')
 @click.option('--offair', 'offair_cmd', type=click.Path(),
-                help='Script to run when leaving a Zoom meeting')
+              help='Script to run when leaving a Zoom meeting')
 @click.option('--process', 'process_regex', default='^CptHost$',
-                help='Regex to match for process name, used to debug')
+              help='Regex to match for process name, used to debug')
 @click.option('--loglevel', 'loglevel', default='WARN',
-                type=click.Choice(['ERROR', 'WARN', 'INFO', 'DEBUG'], case_sensitive=False))
+              type=click.Choice(['ERROR', 'WARN', 'INFO', 'DEBUG'], case_sensitive=False))
 def main(onair_cmd, offair_cmd, process_regex, loglevel):
     """Runs scripts in response to you joining or leaving a Zoom call
 
