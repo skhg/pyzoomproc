@@ -16,13 +16,13 @@ mlog = logging.getLogger('pyzoomproc')
 
 @click.command()
 @click.option('--onair', 'onair_cmd', required=True, type=click.Path(),
-            help='Script to run when joining a Zoom meeting')
+                help='Script to run when joining a Zoom meeting')
 @click.option('--offair', 'offair_cmd', type=click.Path(),
-            help='Script to run when leaving a Zoom meeting')
+                help='Script to run when leaving a Zoom meeting')
 @click.option('--process', 'process_regex', default='^CptHost$',
-            help='Regex to match for process name, used to debug')
+                help='Regex to match for process name, used to debug')
 @click.option('--loglevel', 'loglevel', default='WARN',
-            type=click.Choice(['ERROR', 'WARN', 'INFO', 'DEBUG'], case_sensitive=False))
+                type=click.Choice(['ERROR', 'WARN', 'INFO', 'DEBUG'], case_sensitive=False))
 def main(onair_cmd, offair_cmd, process_regex, loglevel):
     """Runs scripts in response to you joining or leaving a Zoom call
 
@@ -39,11 +39,11 @@ def main(onair_cmd, offair_cmd, process_regex, loglevel):
         onair_cmd = onair_cmd + " on"
 
     while True:
-    # Does a process matching the CptHost zoom process and owned by me exist?
-    # that's a reliable proxy for "I am in a meeting"
+        # Does a process matching the CptHost zoom process and owned by me exist?
+        # that's a reliable proxy for "I am in a meeting"
         proc = pyzoomproc.scan_for_proc(
             matching=re.compile(process_regex),
-            for_user=pwd.getpwuid( os.getuid() )[0]
+            for_user=pwd.getpwuid(os.getuid())[0]
         )
 
         # we found one!
@@ -56,7 +56,7 @@ def main(onair_cmd, offair_cmd, process_regex, loglevel):
             # when it does, the callback will execute the off-air command
             mlog.info(f"{proc.info} - waiting for exit")
             psutil.wait_procs(
-                [proc], 
+                [proc],
                 callback=pyzoomproc.process_end(shlex.split(offair_cmd)))
 
         # if we're not waiting for a process to end, only check every 5 seconds
