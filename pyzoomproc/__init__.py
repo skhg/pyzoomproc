@@ -8,7 +8,7 @@ mlog = logging.getLogger('pyzoomproc')
 def scan_for_proc(matching, for_user=None):
     """scans process list for matching process
 
-    Returns the first running process belonging to the user named in 
+    Returns the first running process belonging to the user named in
     ``for_user`` and whose processname (not full path!) matches the regex in
     ``matching``
 
@@ -25,7 +25,7 @@ def scan_for_proc(matching, for_user=None):
             if proc.info['username'] != for_user:
                 mlog.debug(f"Skipping {proc.info['pid']}, belongs to {proc.info['username']}")
                 continue
-        
+
         mlog.debug(f"Considering {proc.info}")
         match = matching.search(proc.info['name'])
         if not match:
@@ -40,10 +40,10 @@ def scan_for_proc(matching, for_user=None):
 
 def process_end(command):
     """generates a psutil.proc_wait() callback that executes ``command``
-    
+
     Returns a function that accepts a ``pstil.Process`` object. When the
     returned function is called, it will execute ``command`` using the
-    ``subprocess.call`` method. 
+    ``subprocess.call`` method.
     """
 
     def pend_callback(proc):
