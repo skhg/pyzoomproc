@@ -36,6 +36,6 @@ jobs:
 
       - name: "Run radon"
         run: |
-          radon cc ./py_markdown_diary/ -a
+          radon cc ./pyzoomproc/ -a
           radon mi .
           radon raw . -s
